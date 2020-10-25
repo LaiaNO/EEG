@@ -3,5 +3,6 @@
 #Info
 https://programtalk.com/vs2/python/8629/mne-python/mne/io/eeglab/tests/test_eeglab.py/ 
 https://github.com/mne-tools/mne-python/blob/master/mne/io/eeglab/eeglab.py 
+https://www.fieldtriptoolbox.org/faq/dataformat/ 
 
 #Functions
