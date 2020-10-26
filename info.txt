@@ -4,5 +4,7 @@
 https://programtalk.com/vs2/python/8629/mne-python/mne/io/eeglab/tests/test_eeglab.py/ 
 https://github.com/mne-tools/mne-python/blob/master/mne/io/eeglab/eeglab.py 
 https://www.fieldtriptoolbox.org/faq/dataformat/ 
+https://www.fieldtriptoolbox.org/faq/how_are_the_lpa_and_rpa_points_defined/ #LPA AND RPA MEANING
+https://www.neuroelectrics.com/blog/2014/12/18/eeg-signal-processing-for-dummies/ #INTRODUCTION
 
 #Functions
