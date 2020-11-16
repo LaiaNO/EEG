@@ -1,4 +1,4 @@
 {
-    "python.dataScience.jupyterServerURI": "local",
-    "python.pythonPath": "/Users/laianavarroolivella/opt/anaconda3/envs/mne/bin/python"
+    "python.pythonPath": "/Users/laianavarroolivella/opt/anaconda3/envs/mne/bin/python",
+    "jupyter.jupyterServerType": "local"
 }

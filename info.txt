@@ -7,5 +7,8 @@ https://www.fieldtriptoolbox.org/faq/dataformat/
 https://www.fieldtriptoolbox.org/faq/how_are_the_lpa_and_rpa_points_defined/ #LPA AND RPA MEANING
 https://www.neuroelectrics.com/blog/2014/12/18/eeg-signal-processing-for-dummies/ #INTRODUCTION
 https://dsp.stackexchange.com/questions/29125/how-to-identify-and-differentiate-frequency-and-time-in-eeg-data-using-python?rq=1 #EEG signal work
+http://www.sci.utah.edu/publications/anderson10/Anderson_python_processing2010.pdf #Info general
+https://neuroimage.usc.edu/brainstorm/Introduction #program 
+
 
 #Functions
