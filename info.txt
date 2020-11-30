@@ -9,6 +9,15 @@ https://www.neuroelectrics.com/blog/2014/12/18/eeg-signal-processing-for-dummies
 https://dsp.stackexchange.com/questions/29125/how-to-identify-and-differentiate-frequency-and-time-in-eeg-data-using-python?rq=1 #EEG signal work
 http://www.sci.utah.edu/publications/anderson10/Anderson_python_processing2010.pdf #Info general
 https://neuroimage.usc.edu/brainstorm/Introduction #program 
+#google: https://www.google.com/search?client=safari&rls=en&q=find+the+%22big%22+band+find+the+%22small%22+band+Divided+each+one+with+the+big+band+eeg&ie=UTF-8&oe=UTF-8
 
+#google: https://www.google.com/search?client=safari&rls=en&sxsrf=ALeKk03QdsEe4eYyE3wWlOdsr5PK18_8Pg:1606061250586&q=np.trapz+%22eeg%22+python&sa=X&ved=2ahUKEwjj_8-yxJbtAhXqSxUIHc0wAV8Q5t4CMAB6BAgEEAw&biw=1440&bih=837
+
+#trp: https://numpy.org/doc/stable/reference/generated/numpy.trapz.html
+
+#walav: https://pywavelets.readthedocs.io/en/latest/ref/dwt-discrete-wavelet-transform.html 
+
+#http://centaur.reading.ac.uk/76159/9/biosensors-08-00030%20%281%29.pdf 
+# https://raphaelvallat.com/bandpower.html #ban power
 
 #Functions
