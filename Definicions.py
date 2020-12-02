@@ -127,3 +127,39 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
     if relative:
         bp /= simps(psd, dx=freq_res)
     return bp
+
+
+def epoch_return(groups_date_finalle2):
+    epoch_dat=[]
+    for data in groups_date_finalle2:
+        Fs = 250.0
+        Ts = 1.0/Fs
+        t = np.arange(len(data)) / Fs
+
+        n = len(data) # length of the signal
+        k = np.arange(n)
+        T = n/Fs
+        frq = k/T # two sides frequency range
+        frq = frq[range(int(n/2))]
+
+        Y = np.fft.fft(data)/n
+        Y = Y[range(int(n/2))]
+        save_epoc_data = []
+        save_epoc_temps = []
+        tinici = 0
+        tfinal = 1250
+        for i in range(0,int(int(T)/5)):
+            #FROM THE CHANEL SELECTED EXTRACT THE t DATA
+            t = grabt(data)
+
+            #SELECT FROM t AND group_date THE DATA FROM POSITIONS tinici to tfinal
+            epoc_temps = t[tinici:tfinal]
+            epoc_data = data[tinici:tfinal]
+
+            save_epoc_data.append(epoc_data)
+            save_epoc_temps.append(epoc_temps)    
+
+            tfinal=tfinal+1250
+            tinici= tinici+1250
+        epoch_dat.append(save_epoc_data)
+    return epoch_dat
