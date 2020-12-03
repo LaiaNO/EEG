@@ -163,3 +163,6 @@ def epoch_return(groups_date_finalle2):
             tinici= tinici+1250
         epoch_dat.append(save_epoc_data)
     return epoch_dat
+
+def collect(l, index):
+   return map(itemgetter(index), l)

@@ -1,4 +1,6 @@
 #EEGLAB
+https://github.com/meagmohit/EEG-Datasets #data sets
+
 
 #Info
 https://programtalk.com/vs2/python/8629/mne-python/mne/io/eeglab/tests/test_eeglab.py/ 
