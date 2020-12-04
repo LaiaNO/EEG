@@ -106,6 +106,7 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
     band = np.asarray(band)
     low, high = band
 
+
     # Define window length
     if window_sec is not None:
         nperseg = window_sec * sf
@@ -114,15 +115,21 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
 
     # Compute the modified periodogram (Welch)
     freqs, psd = welch(data, sf, nperseg=nperseg)
+    print('freqs', freqs)
+    print('psd', psd)
 
     # Frequency resolution
     freq_res = freqs[1] - freqs[0]
-
+    print('frq',freq_res)
+    
+    #ok
     # Find closest indices of band in frequency vector
     idx_band = np.logical_and(freqs >= low, freqs <= high)
+    print('ind', idx_band)
 
     # Integral approximation of the spectrum using Simpson's rule.
     bp = simps(psd[idx_band], dx=freq_res)
+    print('bp', bp)
 
     if relative:
         bp /= simps(psd, dx=freq_res)
@@ -164,5 +171,5 @@ def epoch_return(groups_date_finalle2):
         epoch_dat.append(save_epoc_data)
     return epoch_dat
 
-def collect(l, index):
-   return map(itemgetter(index), l)
+'''def collect(l, index):
+   return map(itemgetter(index), l)'''
