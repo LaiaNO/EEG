@@ -13,7 +13,11 @@ from scipy import signal
 import matplotlib.colors as mcolors
 import random
 import seaborn as sns
-import spectrum
+import os
+from scipy import stats
+import statsmodels.api as sm
+import numpy as np
+import matplotlib.pyplot as plt
 
 #DEF
 
@@ -171,5 +175,51 @@ def epoch_return(groups_date_finalle2):
         epoch_dat.append(save_epoc_data)
     return epoch_dat
 
-def collect(l, index):
-   return map(itemgetter(index), l)
+'''def collect(l, index):
+   return map(itemgetter(index), l)'''
+
+def calcul(names, sorted_list_EO, sorted_list_EC, TeiQueSF_emotionality, pacient_beta, pacient_beta_EC, yo, oy):
+    all_info = []
+    x_corr = []
+    y_corr = []
+    x_corr_EC = []
+    y_corr_EC = []
+    for i in range(0, len(sorted_list_EO)):
+        hename = sorted_list_EO[i]
+        hename = str(hename[:-7])
+        if hename in names:
+            indices = [i for i, s in enumerate(names) if hename in s]
+            x = (float(TeiQueSF_emotionality[int(indices[0])]))
+            x_corr.append(x)
+            y = (float(pacient_beta[i]))
+            y_corr.append(y)
+            plt.scatter(x,y, c='b')
+
+        hename = sorted_list_EC[i]
+        hename = str(hename[:-7])
+        if hename in names:
+            indices = [i for i, s in enumerate(names) if hename in s]
+            x = (float(TeiQueSF_emotionality[int(indices[0])]))
+            x_corr_EC.append(x)
+            y = (float(pacient_beta_EC[i]))
+            y_corr_EC.append(y)
+            plt.scatter(x,y, c='r')
+
+    #LINE EC
+    z = np.poly1d(np.polyfit(x_corr, y_corr, 1))
+    y_len = np.array(len(y_corr))
+    xp = np.linspace(yo, oy, y_len)
+    y = z(xp)
+    plt.plot(xp, y, c='b')
+
+    #LINE EO
+    z = np.poly1d(np.polyfit(x_corr_EC, y_corr_EC, 1))
+    y_len = np.array(len(y_corr_EC))
+    xp = np.linspace(yo, oy, y_len)
+    y = z(xp)
+    plt.plot(xp, y, c='r')
+
+    #PLOT ALL POINTS
+    plt.title('Plot show the correlation between TeiQueSF_emotionality and Band Power')
+    plt.show()
+    #print(stats.pearsonr(x_corr, y_corr))
