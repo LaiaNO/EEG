@@ -222,4 +222,4 @@ def calcul(names, sorted_list_EO, sorted_list_EC, TeiQueSF_emotionality, pacient
     #PLOT ALL POINTS
     plt.title('Plot show the correlation between TeiQueSF_emotionality and Band Power')
     plt.show()
-    #print(stats.pearsonr(x_corr, y_corr))
+    print(stats.pearsonr(x_corr, y_corr))
