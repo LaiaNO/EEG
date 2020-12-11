@@ -122,7 +122,7 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
             chanels_delta.append(f_delta)
                 
 
-    '''mean_x = statistics.median(chanels_betta)
+    mean_x = statistics.median(chanels_betta)
     pacient_beta_EO.append(mean_x)
 
     mean_x = statistics.median(chanels_gama)
@@ -135,5 +135,5 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
     pacient_theta_EO.append(mean_x)
 
     mean_x = statistics.median(chanels_delta)
-    pacient_delta_EO.append(mean_x)'''
-    return chanels_betta, chanels_gama, chanels_alpha, chanels_theta, chanels_delta
+    pacient_delta_EO.append(mean_x)
+    return pacient_beta_EO, pacient_alpha_EO, pacient_gama_EO, pacient_theta_EO, pacient_delta_EO

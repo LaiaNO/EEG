@@ -136,15 +136,7 @@ def calcul(names, sorted_list_EO, sorted_list_EC, TeiQueSF_emotionality, pacient
             y = (float(pacient_beta[i]))
             y_corr.append(y)
             plt.scatter(x,y, c='b')
-
-            indices = [i for i, s in enumerate(names) if hename in s]
-            x = (float(TeiQueSF_emotionality[int(indices[0])]))
-            x_corr_2.append(x)
-            y = (float(pacient_beta_EC[i]))
-            y_corr_2.append(y)
-            plt.scatter(x,y, c='r')
             
-
     #LINE EC
     z = np.poly1d(np.polyfit(x_corr, y_corr, 1))
     y_len = np.array(len(y_corr))
@@ -152,19 +144,8 @@ def calcul(names, sorted_list_EO, sorted_list_EC, TeiQueSF_emotionality, pacient
     y = z(xp)
     plt.plot(xp, y, c='b')
 
-    #LINE EC
-    z = np.poly1d(np.polyfit(x_corr_2, y_corr_2, 1))
-    y_len = np.array(len(y_corr_2))
-    xp = np.linspace(yo, oy, y_len)
-    y = z(xp)
-    plt.plot(xp, y, c='r')
-
-
     #PLOT ALL POINTS
     plt.title('Plot show the correlation between TeiQueSF_emotionality and Band Power')
     print(stats.pearsonr(x_corr, y_corr))
 
-    #PLOT ALL POINTS
-    plt.title('Plot show the correlation between TeiQueSF_emotionality and Band Power')
-    plt.show()
-    print(stats.pearsonr(x_corr_2, y_corr_2))
+    return stats.pearsonr(x_corr, y_corr)
