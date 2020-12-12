@@ -25,4 +25,7 @@ https://neuroimage.usc.edu/brainstorm/Introduction #program
 #https://iopscience.iop.org/article/10.1088/1757-899X/557/1/012030/pdf #Analysis of EEG Spectrum Bands Using Power Spectral Density
 
 
+
+#https://www.biorxiv.org/content/10.1101/2020.10.02.323840v1.full com fer el esquema 
+
 #Functions
