@@ -120,12 +120,10 @@ def epoch_return(groups_date_finalle2):
 '''def collect(l, index):
    return map(itemgetter(index), l)'''
 
-def calcul(names, sorted_list_EO, sorted_list_EC, TeiQueSF_emotionality, pacient_beta, pacient_beta_EC, yo, oy):
+def calcul(names, sorted_list_EO, TeiQueSF_emotionality, pacient_beta, yo, oy, color):
     all_info = []
     x_corr = []
     y_corr = []
-    x_corr_2 = []
-    y_corr_2 = []
     for i in range(0, len(sorted_list_EO)):
         hename = sorted_list_EO[i]
         hename = str(hename[:-7])
@@ -135,7 +133,7 @@ def calcul(names, sorted_list_EO, sorted_list_EC, TeiQueSF_emotionality, pacient
             x_corr.append(x)
             y = (float(pacient_beta[i]))
             y_corr.append(y)
-            plt.scatter(x,y, c='b')
+            plt.scatter(x,y, c=color)
             
     #LINE EC
     z = np.poly1d(np.polyfit(x_corr, y_corr, 1))
