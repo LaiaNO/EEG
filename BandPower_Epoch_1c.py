@@ -106,19 +106,19 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
         EO_Epochs = epoch_return(pacient[eovsEO])
 
         for epoch in EO_Epochs[numchanel]:
-            f_beta = bandpower(epoch, 250,[30, 250], window_sec=40, relative=True)
+            f_beta = bandpower(epoch, 250,[30, 250], window_sec=50, relative=True)
             chanels_betta.append(f_beta)
             #gamma
-            f_gama = bandpower(epoch, 250, [32, 100], window_sec=40, relative=True)
+            f_gama = bandpower(epoch, 250, [32, 100], window_sec=50, relative=True)
             chanels_gama.append(f_gama)
             #alpha
-            f_alpha = bandpower(epoch, 250, [9, 13], window_sec=40, relative=True)
+            f_alpha = bandpower(epoch, 250, [9, 13], window_sec=50, relative=True)
             chanels_alpha.append(f_alpha)
             #theta
-            f_theta = bandpower(epoch, 250, [4, 8], window_sec=40, relative=True)
+            f_theta = bandpower(epoch, 250, [4, 8], window_sec=50, relative=True)
             chanels_theta.append(f_theta)
             #delta
-            f_delta = bandpower(epoch, 250, [0.1, 4], window_sec=40, relative=True)
+            f_delta = bandpower(epoch, 250, [0.1, 4], window_sec=50, relative=True)
             chanels_delta.append(f_delta)
                 
 
