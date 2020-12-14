@@ -27,7 +27,6 @@ from Definicions import opteciogrups
 from Definicions import find_nearest
 from Definicions import grabt
 from Definicions import epoch_return
-from Definicions import calcul
 
 def bandpower(data, sf, band, window_sec=None, relative=False):
     """Compute the average power of the signal x in a specific frequency band.
