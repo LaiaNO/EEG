@@ -68,10 +68,10 @@ def minus_return(names, sorted_list_EO, TeiQueSF_emotionality, list_bands):
                     y_corr.append(y)
 
         #PLOT ALL POINTS
-        resultat = stats.pearsonr(x_corr, y_corr)
+        '''resultat = stats.pearsonr(x_corr, y_corr)
         minus_5.append(resultat[0])
-
-    return minus_5
+        '''
+    return y_corr
 
 
 
@@ -94,10 +94,11 @@ def max5_return(names, sorted_list_EO, TeiQueSF_emotionality, list_bands):
                     y_corr.append(y)
 
         #PLOT ALL POINTS
-        resultat = stats.pearsonr(x_corr, y_corr)
-        max_5.append(resultat[0])
+        '''resultat = stats.pearsonr(x_corr, y_corr)
+        max_5.append(resultat[0])'''
 
-    return max_5
+
+    return y_corr
 
 
 def plotbar_info (names, sorted_list_EO, TeiQueSF_emotionality, list_bands):
@@ -119,7 +120,7 @@ def plotbar_info (names, sorted_list_EO, TeiQueSF_emotionality, list_bands):
     ax.legend()
 
 
-    def autolabel(rects):
+    '''def autolabel(rects):
         """Attach a text label above each bar in *rects*, displaying its height."""
         for rect in rects:
             height = rect.get_height()
@@ -130,7 +131,7 @@ def plotbar_info (names, sorted_list_EO, TeiQueSF_emotionality, list_bands):
                         ha='center', va='bottom')
 
     autolabel(rects1)
-    autolabel(rects2)
+    autolabel(rects2)'''
 
     fig.tight_layout()
 

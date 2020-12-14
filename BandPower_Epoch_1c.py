@@ -36,11 +36,11 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
     data : 1d-array
         Input signal in the time-domain.
     sf : float
-        Sampling frequency of the data.
+        Sampling frequency of the data. (250)
     band : list
         Lower and upper frequencies of the band of interest.
     window_sec : float
-        Length of each window in seconds.
+        Length of each window in seconds. 
         If None, window_sec = (1 / min(band)) * 2
     relative : boolean
         If True, return the relative power (= divided by the total power of the signal).
