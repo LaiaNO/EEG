@@ -87,10 +87,11 @@ def Import_Patients(basePATH):
         x=mne.io.read_raw_eeglab(basePATH+i, preload=True, verbose=True)
         #GET DATA
         data = x._data
+        datafinal = data[:119200]
         #GET CHANELS
         chanles_names = x.ch_names
         #REDUCE CHANELS TO 12
-        EO = opteciogrups(chanles_names, groups, data)
+        EO = opteciogrups(chanles_names, groups, datafinal)
 
         #Select the same but with EC
         EC_name = [sorted_list_EC.index(e) for e in sorted_list_EC if i[:-6] in e]
@@ -99,10 +100,11 @@ def Import_Patients(basePATH):
         x2=mne.io.read_raw_eeglab(basePATH+EC_name_PATH, preload=True, verbose=True)
         #GET DATA
         data2 = x2._data
+        datafinal2 = data2[:119200]
         #GET CHANELS
         chanles_names2 = x2.ch_names
         #REDUCE CHANELS TO 12
-        EC = opteciogrups(chanles_names2, groups, data2)
+        EC = opteciogrups(chanles_names2, groups, datafinal2)
 
         #save
         EO_EC_P = []
