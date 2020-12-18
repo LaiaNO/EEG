@@ -20,10 +20,6 @@ import matplotlib.pyplot as plt
 from numpy import asarray
 from numpy import savetxt
 
-from Definicions import upperchanel
-from Definicions import group_inf
-from Definicions import mediumchanels
-from Definicions import opteciogrups
 from Definicions import find_nearest
 from Definicions import grabt
 from Definicions import epoch_return
@@ -85,6 +81,13 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
         bp /= simps(psd, dx=freq_res)
     return bp
 
+import scipy 
+
+def bandpower2(x, fs, fmin, fmax):
+    f, Pxx = scipy.signal.periodogram(x, fs=fs)
+    ind_min = scipy.argmax(f > fmin) - 1
+    ind_max = scipy.argmax(f > fmax) - 1
+    return scipy.trapz(Pxx[ind_min: ind_max], f[ind_min: ind_max])
 
 
 def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
@@ -118,6 +121,53 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
             chanels_theta.append(f_theta)
             #delta
             f_delta = bandpower(epoch, 250, [0.1, 4], window_sec=50, relative=True)
+            chanels_delta.append(f_delta)
+                
+
+        mean_x = statistics.median(chanels_betta)
+        mean_y = statistics.median(chanels_gama)
+        mean_t = statistics.median(chanels_alpha)
+        mean_o = statistics.median(chanels_theta)
+        mean_p = statistics.median(chanels_delta)
+
+        pacient_beta_EO.append(mean_x)
+        pacient_alpha_EO.append(mean_t)
+        pacient_gama_EO.append(mean_y)
+        pacient_theta_EO.append(mean_o)
+        pacient_delta_EO.append(mean_p)
+    return pacient_beta_EO, pacient_alpha_EO, pacient_gama_EO, pacient_theta_EO, pacient_delta_EO
+
+def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
+
+    pacient_beta_EO = []
+    pacient_alpha_EO = []
+    pacient_gama_EO = []
+    pacient_theta_EO = []
+    pacient_delta_EO = []
+
+    chanels_betta = []
+    chanels_gama = []
+    chanels_alpha = []
+    chanels_theta = []
+    chanels_delta = []
+
+    for pacient in EO_EC_Pacients:
+        EO_Epochs = epoch_return(pacient[eovsEO])
+
+        for epoch in EO_Epochs[numchanel]:
+            f_beta = bandpower2(epoch, 250,[30, 250])
+            chanels_betta.append(f_beta)
+            #gamma
+            f_gama = bandpower2(epoch, 250, [32, 100])
+            chanels_gama.append(f_gama)
+            #alpha
+            f_alpha = bandpower2(epoch, 250, [9, 13])
+            chanels_alpha.append(f_alpha)
+            #theta
+            f_theta = bandpower2(epoch, 250, [4, 8])
+            chanels_theta.append(f_theta)
+            #delta
+            f_delta = bandpower2(epoch, 250, [0.1, 4])
             chanels_delta.append(f_delta)
                 
 
