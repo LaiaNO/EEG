@@ -199,5 +199,5 @@ def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
         pacient_gama_l_EO.append(mean_l)
         pacient_theta_EO.append(mean_o)
         pacient_delta_EO.append(mean_p)
-        #chanels1_delta_EO, chanels1_theta_EO, chanels1_alpha_EO, chanels1_beta_EO, chanels1_gama_EO
+
     return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO 

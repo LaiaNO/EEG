@@ -68,10 +68,10 @@ def minus_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ba
                     y_corr.append(y)
 
         #PLOT ALL POINTS
-        '''resultat = stats.pearsonr(x_corr, y_corr)
-        minus_5.append(resultat[0])
-        '''
-    return y_corr
+        resultat = statistics.mean(y_corr)
+        minus_5.append(resultat)
+        
+    return minus_5
 
 
 
@@ -94,15 +94,16 @@ def max5_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ban
                     y_corr.append(y)
 
         #PLOT ALL POINTS
-        '''resultat = stats.pearsonr(x_corr, y_corr)
-        max_5.append(resultat[0])'''
+        resultat = statistics.mean(y_corr)
+        max_5.append(resultat)
 
 
-    return y_corr
+    return max_5
 
 
 def plotbar_info_bandpower (names, sorted_list_EO, TeiQueSF_emotionality, list_bands):
-    labels = ['Betta', 'Gamma', 'ALpha', 'theta', 'delta']
+    #chanels1_delta_EO, chanels1_theta_EO, chanels1_alpha_EO, chanels1_beta_EO, chanels1_gama_l_EO, chanels1_gama_u_EO
+    labels = ['Delta', 'Theta', 'Alpha', 'Beta', 'Gama Lower', 'Gama Upper']
     minus5 = minus_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_bands)
     max5 = max5_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_bands)
 
