@@ -21,9 +21,57 @@ import matplotlib.pyplot as plt
 from Definicions import upperchanel
 from Definicions import group_inf
 from Definicions import mediumchanels
-from Definicions import opteciogrups
 from Definicions import find_nearest
 from Definicions import grabt
+
+
+'''FOR THE INITIAL DATA TREATMENT'''
+#DEF UPPER CHANNEL
+def upperchanel(chanlesnames):
+    upperchanels=[]
+    for i in chanlesnames:
+        r = i.upper()
+        upperchanels.append(r)
+    return upperchanels
+
+#DEF GRUP INFO DE CADA COMPONENT
+def group_inf(nomgroup, data_chan, upperchanels):
+    group_date = []
+
+    for e in nomgroup:
+        if e in upperchanels:
+            num = upperchanels.index(e)
+            group_date.append(data_chan[num])  
+    return group_date
+
+#DEF MEDIUM DELS GRUPS
+#group_dat = [[1,2,3,..., 119345],[1,2,3,..., 119345],[1,2,3,..., 119345],[1,2,3,..., 119345]]
+def mediumchanels(group_dat):
+    segundo = len(group_dat[0])
+    primero = len(group_dat)
+    mean_data = []
+    for i in range (0,segundo):
+        suma1=[]
+        for e in range(0,primero):
+            suma1.append(group_dat[e][i])
+        numpero = statistics.median(suma1)
+        mean_data.append(numpero)
+    return mean_data
+
+#Obtencion de los grupos
+def opteciogrups(chanlesnames, groupp, data_chan): # chanlesnames 62, groupp 12 i cada un amb els noms, data_chan all data 1 pacient EO o EC 
+    group_date_finale = [] #Save all informatio chanels 12.
+    group_date_final = [] #final copy
+    upchan = upperchanel(chanlesnames)
+    for i in groupp: #x cada un dels 12 grups
+        group_date = group_inf(i, data_chan, upchan)
+        mean_group = mediumchanels(group_date)
+        mean_array = np.array(mean_group)
+        group_date_finale.append(mean_array)
+    group_date_final = np.array(group_date_finale)
+    return group_date_final
+
+
 
 def Import_Patients(basePATH):
 
@@ -87,11 +135,10 @@ def Import_Patients(basePATH):
         x=mne.io.read_raw_eeglab(basePATH+i, preload=True, verbose=True)
         #GET DATA
         data = x._data
-        datafinal = data[:119200]
         #GET CHANELS
         chanles_names = x.ch_names
         #REDUCE CHANELS TO 12
-        EO = opteciogrups(chanles_names, groups, datafinal)
+        EO = opteciogrups(chanles_names, groups, data)
 
         #Select the same but with EC
         EC_name = [sorted_list_EC.index(e) for e in sorted_list_EC if i[:-6] in e]
@@ -100,11 +147,10 @@ def Import_Patients(basePATH):
         x2=mne.io.read_raw_eeglab(basePATH+EC_name_PATH, preload=True, verbose=True)
         #GET DATA
         data2 = x2._data
-        datafinal2 = data2[:119200]
         #GET CHANELS
         chanles_names2 = x2.ch_names
         #REDUCE CHANELS TO 12
-        EC = opteciogrups(chanles_names2, groups, datafinal2)
+        EC = opteciogrups(chanles_names2, groups, data2)
 
         #save
         EO_EC_P = []
