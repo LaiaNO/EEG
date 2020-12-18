@@ -94,12 +94,14 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
 
     pacient_beta_EO = []
     pacient_alpha_EO = []
-    pacient_gama_EO = []
+    pacient_gama_l_EO = []
+    pacient_gama_u_EO = []
     pacient_theta_EO = []
     pacient_delta_EO = []
 
     chanels_betta = []
-    chanels_gama = []
+    chanels_gama_u = []
+    chanels_gama_l = []
     chanels_alpha = []
     chanels_theta = []
     chanels_delta = []
@@ -108,34 +110,42 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
         EO_Epochs = epoch_return(pacient[eovsEO])
 
         for epoch in EO_Epochs[numchanel]:
-            f_beta = bandpower(epoch, 250,[30, 250], window_sec=50, relative=True)
+            
+            #gamma upper
+            f_gama_upper = bandpower(epoch, 250, [80, 250], window_sec=50, relative=True)
+            chanels_gama_u.append(f_gama_upper)
+            #gamma lower
+            f_gama_lower = bandpower(epoch, 250, [30, 80], window_sec=50, relative=True)
+            chanels_gama_l.append(f_gama_lower)
+            #beta
+            f_beta = bandpower(epoch, 250,[15, 30], window_sec=50, relative=True)
             chanels_betta.append(f_beta)
-            #gamma
-            f_gama = bandpower(epoch, 250, [32, 100], window_sec=50, relative=True)
-            chanels_gama.append(f_gama)
             #alpha
-            f_alpha = bandpower(epoch, 250, [9, 13], window_sec=50, relative=True)
+            f_alpha = bandpower(epoch, 250, [8, 12], window_sec=50, relative=True)
             chanels_alpha.append(f_alpha)
             #theta
             f_theta = bandpower(epoch, 250, [4, 8], window_sec=50, relative=True)
             chanels_theta.append(f_theta)
             #delta
-            f_delta = bandpower(epoch, 250, [0.1, 4], window_sec=50, relative=True)
+            f_delta = bandpower(epoch, 250, [2, 4], window_sec=50, relative=True)
             chanels_delta.append(f_delta)
                 
 
         mean_x = statistics.median(chanels_betta)
-        mean_y = statistics.median(chanels_gama)
+        mean_l = statistics.median(chanels_gama_l)
+        mean_y = statistics.median(chanels_gama_u)
         mean_t = statistics.median(chanels_alpha)
         mean_o = statistics.median(chanels_theta)
         mean_p = statistics.median(chanels_delta)
 
         pacient_beta_EO.append(mean_x)
         pacient_alpha_EO.append(mean_t)
-        pacient_gama_EO.append(mean_y)
+        pacient_gama_u_EO.append(mean_y)
+        pacient_gama_l_EO.append(mean_l)
         pacient_theta_EO.append(mean_o)
         pacient_delta_EO.append(mean_p)
-    return pacient_beta_EO, pacient_alpha_EO, pacient_gama_EO, pacient_theta_EO, pacient_delta_EO
+        #chanels1_delta_EO, chanels1_theta_EO, chanels1_alpha_EO, chanels1_beta_EO, chanels1_gama_EO
+    return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO 
 
 def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
 
@@ -155,31 +165,39 @@ def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
         EO_Epochs = epoch_return(pacient[eovsEO])
 
         for epoch in EO_Epochs[numchanel]:
-            f_beta = bandpower2(epoch, 250,[30, 250])
+            
+            #gamma upper
+            f_gama_upper = bandpower2(epoch, 250, 80, 250)
+            chanels_gama_u.append(f_gama_upper)
+            #gamma lower
+            f_gama_lower = bandpower2(epoch, 250, 30, 80)
+            chanels_gama_l.append(f_gama_lower)
+            #beta
+            f_beta = bandpower2(epoch, 250, 15, 30)
             chanels_betta.append(f_beta)
-            #gamma
-            f_gama = bandpower2(epoch, 250, [32, 100])
-            chanels_gama.append(f_gama)
             #alpha
-            f_alpha = bandpower2(epoch, 250, [9, 13])
+            f_alpha = bandpower2(epoch, 250, 8, 12)
             chanels_alpha.append(f_alpha)
             #theta
-            f_theta = bandpower2(epoch, 250, [4, 8])
+            f_theta = bandpower2(epoch, 250, 4, 8)
             chanels_theta.append(f_theta)
             #delta
-            f_delta = bandpower2(epoch, 250, [0.1, 4])
+            f_delta = bandpower2(epoch, 250, 2, 4)
             chanels_delta.append(f_delta)
                 
 
         mean_x = statistics.median(chanels_betta)
-        mean_y = statistics.median(chanels_gama)
+        mean_l = statistics.median(chanels_gama_l)
+        mean_y = statistics.median(chanels_gama_u)
         mean_t = statistics.median(chanels_alpha)
         mean_o = statistics.median(chanels_theta)
         mean_p = statistics.median(chanels_delta)
 
         pacient_beta_EO.append(mean_x)
         pacient_alpha_EO.append(mean_t)
-        pacient_gama_EO.append(mean_y)
+        pacient_gama_u_EO.append(mean_y)
+        pacient_gama_l_EO.append(mean_l)
         pacient_theta_EO.append(mean_o)
         pacient_delta_EO.append(mean_p)
-    return pacient_beta_EO, pacient_alpha_EO, pacient_gama_EO, pacient_theta_EO, pacient_delta_EO
+        #chanels1_delta_EO, chanels1_theta_EO, chanels1_alpha_EO, chanels1_beta_EO, chanels1_gama_EO
+    return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO 
