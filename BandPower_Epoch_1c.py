@@ -112,22 +112,22 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
         for epoch in EO_Epochs[numchanel]:
             
             #gamma upper
-            f_gama_upper = bandpower(epoch, 250, [80, 250], window_sec=50, relative=True)
+            f_gama_upper = bandpower(epoch, 250, [80, 250], window_sec=1, relative=True)
             chanels_gama_u.append(f_gama_upper)
             #gamma lower
-            f_gama_lower = bandpower(epoch, 250, [30, 80], window_sec=50, relative=True)
+            f_gama_lower = bandpower(epoch, 250, [30, 80], window_sec=1, relative=True)
             chanels_gama_l.append(f_gama_lower)
             #beta
-            f_beta = bandpower(epoch, 250,[15, 30], window_sec=50, relative=True)
+            f_beta = bandpower(epoch, 250,[15, 30], window_sec=1, relative=True)
             chanels_betta.append(f_beta)
             #alpha
-            f_alpha = bandpower(epoch, 250, [8, 12], window_sec=50, relative=True)
+            f_alpha = bandpower(epoch, 250, [8, 12], window_sec=1, relative=True)
             chanels_alpha.append(f_alpha)
             #theta
-            f_theta = bandpower(epoch, 250, [4, 8], window_sec=50, relative=True)
+            f_theta = bandpower(epoch, 250, [4, 8], window_sec=1, relative=True)
             chanels_theta.append(f_theta)
             #delta
-            f_delta = bandpower(epoch, 250, [2, 4], window_sec=50, relative=True)
+            f_delta = bandpower(epoch, 250, [2, 4], window_sec=1, relative=True)
             chanels_delta.append(f_delta)
                 
 
@@ -151,12 +151,14 @@ def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
 
     pacient_beta_EO = []
     pacient_alpha_EO = []
-    pacient_gama_EO = []
+    pacient_gama_l_EO = []
+    pacient_gama_u_EO = []
     pacient_theta_EO = []
     pacient_delta_EO = []
 
     chanels_betta = []
-    chanels_gama = []
+    chanels_gama_u = []
+    chanels_gama_l = []
     chanels_alpha = []
     chanels_theta = []
     chanels_delta = []

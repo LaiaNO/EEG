@@ -55,6 +55,7 @@ def minus_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ba
     x_corr = []
     y_corr = []
     minus_5 = []
+    contador = 0
     for e in list_bands:
         for i in range(0, len(sorted_list_EO)):
             hename = sorted_list_EO[i]
@@ -63,6 +64,7 @@ def minus_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ba
                 indices = [i for i, s in enumerate(names) if hename in s]
                 x = (float(TeiQueSF_emotionality[int(indices[0])]))
                 if x<5.0:
+                    contador = contador + 1
                     x_corr.append(x)
                     y = (float(e[i]))
                     y_corr.append(y)
@@ -70,6 +72,8 @@ def minus_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ba
         #PLOT ALL POINTS
         resultat = statistics.mean(y_corr)
         minus_5.append(resultat)
+        
+        print(contador)
         
     return minus_5
 
@@ -81,6 +85,7 @@ def max5_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ban
     x_corr = []
     y_corr = []
     max_5 = []
+    contador = 0 
     for e in list_bands:
         for i in range(0, len(sorted_list_EO)):
             hename = sorted_list_EO[i]
@@ -92,10 +97,12 @@ def max5_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ban
                     x_corr.append(x)
                     y = (float(e[i]))
                     y_corr.append(y)
+                    contador = contador + 1
 
         #PLOT ALL POINTS
         resultat = statistics.mean(y_corr)
         max_5.append(resultat)
+        pint(contador)
 
 
     return max_5
