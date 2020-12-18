@@ -72,7 +72,7 @@ def minus_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ba
         #PLOT ALL POINTS
         resultat = statistics.mean(y_corr)
         minus_5.append(resultat)
-        
+        print('menos 5')
         print(contador)
         
     return minus_5
@@ -102,7 +102,8 @@ def max5_return_bandpower(names, sorted_list_EO, TeiQueSF_emotionality, list_ban
         #PLOT ALL POINTS
         resultat = statistics.mean(y_corr)
         max_5.append(resultat)
-        pint(contador)
+        print('max 5')
+        print(contador)
 
 
     return max_5
