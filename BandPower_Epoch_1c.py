@@ -99,17 +99,18 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
     pacient_theta_EO = []
     pacient_delta_EO = []
 
-    chanels_betta = []
-    chanels_gama_u = []
-    chanels_gama_l = []
-    chanels_alpha = []
-    chanels_theta = []
-    chanels_delta = []
+    
 
     for pacient in EO_EC_Pacients:
-        EO_Epochs = epoch_return(pacient[eovsEO])
+        EO_Epochs = epoch_return(pacient[eovsEO], numchanel)
+        chanels_betta = []
+        chanels_gama_u = []
+        chanels_gama_l = []
+        chanels_alpha = []
+        chanels_theta = []
+        chanels_delta = []
 
-        for epoch in EO_Epochs[numchanel]:
+        for epoch in EO_Epochs:
             
             #gamma upper
             f_gama_upper = bandpower(epoch, 250, [80, 250], window_sec=1, relative=True)
