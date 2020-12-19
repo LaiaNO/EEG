@@ -36,30 +36,28 @@ def grabt(dat):
     Ts = 1.0/Fs
     t = np.arange(len(dat)) / Fs
     return t
-    
+
+#  groups_date_finalle2=canales
+#  numchanel=channel number
 def epoch_return(groups_date_finalle2, numchanel):
     epoch_dat=[]
     data = groups_date_finalle2[numchanel]
     Fs = 250.0
-    Ts = 1.0/Fs
-    t = np.arange(len(data)) / Fs
-
+    # Ts = 1.0/Fs
     n = len(data) # length of the signal
-    k = np.arange(n)
-    T = n/Fs
-    #frq = k/T # two sides frequency range
-    #frq = frq[range(int(n/2))]
+    t = np.arange(n) / Fs
 
-    #Y = np.fft.fft(data)/n
-    #Y = Y[range(int(n/2))]
+    # k = np.arange(n)
+    #T = n/Fs
+    T= t/n
 
     save_epoc_data = []
-    save_epoc_temps = []
+    # save_epoc_temps = []
     tinici = 0
     tfinal = 1250
     for i in range(0,int(int(T)/5)):
         #FROM THE CHANEL SELECTED EXTRACT THE t DATA
-        t = grabt(data)
+        #t = grabt(data)
 
         #SELECT FROM t AND group_date THE DATA FROM POSITIONS tinici to tfinal
         #epoc_temps = t[tinici:tfinal]

@@ -83,6 +83,11 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
 
 import scipy 
 
+# x=datos
+# fs=sample frequency
+# fmin=min frequency
+# fmax=max frequency
+
 def bandpower2(x, fs, fmin, fmax):
     f, Pxx = scipy.signal.periodogram(x, fs=fs)
     ind_min = scipy.argmax(f > fmin) - 1
@@ -148,6 +153,7 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
         #chanels1_delta_EO, chanels1_theta_EO, chanels1_alpha_EO, chanels1_beta_EO, chanels1_gama_EO
     return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO 
 
+# EO_EC_Pacients=array 4D
 def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
 
     pacient_beta_EO = []
@@ -157,17 +163,19 @@ def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
     pacient_theta_EO = []
     pacient_delta_EO = []
 
-    chanels_betta = []
-    chanels_gama_u = []
-    chanels_gama_l = []
-    chanels_alpha = []
-    chanels_theta = []
-    chanels_delta = []
+    
 
     for pacient in EO_EC_Pacients:
-        EO_Epochs = epoch_return(pacient[eovsEO])
+        EO_Epochs = epoch_return(pacient[eovsEO], numchanel)
 
-        for epoch in EO_Epochs[numchanel]:
+        chanels_betta = []
+        chanels_gama_u = []
+        chanels_gama_l = []
+        chanels_alpha = []
+        chanels_theta = []
+        chanels_delta = []
+
+        for epoch in EO_Epochs:
             
             #gamma upper
             f_gama_upper = bandpower2(epoch, 250, 80, 250)
