@@ -47,9 +47,9 @@ def epoch_return(groups_date_finalle2, numchanel):
     n = len(data) # length of the signal
     t = np.arange(n) / Fs
 
-    # k = np.arange(n)
-    #T = n/Fs
-    T= t/n
+    k = np.arange(n)
+    T = n/Fs
+    #T= t/n
 
     save_epoc_data = []
     # save_epoc_temps = []
