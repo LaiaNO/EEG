@@ -55,7 +55,8 @@ def epoch_return(groups_date_finalle2, numchanel):
     # save_epoc_temps = []
     tinici = 0
     tfinal = 1250
-    for i in range(0,int(int(T)/5)):
+    #for i in range(0,int(int(T)/5)):
+    for i in range(0,int(int(t)/5)):
         #FROM THE CHANEL SELECTED EXTRACT THE t DATA
         #t = grabt(data)
 

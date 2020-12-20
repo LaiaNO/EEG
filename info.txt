@@ -18,12 +18,16 @@ https://neuroimage.usc.edu/brainstorm/Introduction #program
 #trp: https://numpy.org/doc/stable/reference/generated/numpy.trapz.html
 
 #walav: https://pywavelets.readthedocs.io/en/latest/ref/dwt-discrete-wavelet-transform.html 
+#
 
 #http://centaur.reading.ac.uk/76159/9/biosensors-08-00030%20%281%29.pdf 
 # https://raphaelvallat.com/bandpower.html #ban power
 #https://medium.com/@arishuynhvan/a-beginners-journey-to-eeg-bci-part-1-af885363e064 #links a conceptes basics
 #https://iopscience.iop.org/article/10.1088/1757-899X/557/1/012030/pdf #Analysis of EEG Spectrum Bands Using Power Spectral Density
 
+#https://ruidera.uclm.es/xmlui/bitstream/handle/10578/15441/TFG-Luis%20Cabañero%20Gómez.pdf?sequence=1&isAllowed=y TFG
+#https://dkh.deusto.es/comunidad/learning/recurso/design-and-implementation-of-an-eeg-signal/2e5e0ac8-596e-4983-a69a-64673f256ba9 TFG
+#https://www.researchgate.net/publication/51069705_PyEEG_an_open_source_python_module_for_EEGMEG_feature_extraction feature 51069705_PyEEG_an_open_source_python_module_for_EEGMEG_feature_extraction
 
 
 #https://www.biorxiv.org/content/10.1101/2020.10.02.323840v1.full com fer el esquema 
