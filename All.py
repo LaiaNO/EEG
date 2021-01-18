@@ -90,3 +90,13 @@ basePATH = 'Files/Preprocessed/'
 sorted_list_EO, sorted_list_EC, EO_EC_Pacients,Chanels = Import_Patients(basePATH)
 print(len(sorted_list_EO))
 
+with open("sorted_list_EO.txt", "wb") as fp:   #Pickling
+    pickle.dump(sorted_list_EO, fp)
+
+
+with open("sorted_list_EC.txt", "wb") as fp:   #Pickling
+    pickle.dump(sorted_list_EC, fp)
+
+
+with open("EO_EC_Pacients.txt", "wb") as fp:   #Pickling
+    pickle.dump(EO_EC_Pacients, fp)
