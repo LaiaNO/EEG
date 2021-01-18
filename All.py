@@ -20,110 +20,73 @@ import matplotlib.pyplot as plt
 from numpy import asarray
 from numpy import savetxt
 
+def Import_Patients(basePATH):
 
-'''FOR THE INITIAL DATA TREATMENT'''
-#DEF UPPER CHANNEL
-def upperchanel(chanlesnames):
-    upperchanels=[]
-    for i in chanlesnames:
-        r = i.upper()
-        upperchanels.append(r)
-    return upperchanels
+    ###READ FILES IN THE FOLDER AND SAVE THEM
 
-#DEF GRUP INFO DE CADA COMPONENT
-def group_inf(nomgroup, data_chan, upperchanels):
-    group_date = []
-
-    for e in nomgroup:
-        if e in upperchanels:
-            num = upperchanels.index(e)
-            #print(num)
-            group_date.append(data_chan[num])  
-    #print(group_date)
-    return group_date
-
-#DEF MEDIUM DELS GRUPS
-#group_dat = [[1,2,3,..., 119345],[1,2,3,..., 119345],[1,2,3,..., 119345],[1,2,3,..., 119345]]
-def mediumchanels(group_dat):
-    segundo = len(group_dat[0])
-    primero = len(group_dat)
-    mean_data = []
-    for i in range (0,segundo):
-        suma1=[]
-        for e in range(0,primero):
-            suma1.append(group_dat[e][i])
-        numpero = statistics.median(suma1)
-        mean_data.append(numpero)
-    return mean_data
-def opteciogrups(chanlesnames, groupp, data_chan):
-    group_date_finale = [] #Save all informatio chanels 12.
-    group_date_final = [] #final copy
-    upchan = upperchanel(chanlesnames)
-    for i in groupp:
-        group_date = group_inf(i, data_chan, upchan)
-        mean_group = mediumchanels(group_date)
-        mean_array = np.array(mean_group)
-        group_date_finale.append(mean_array)
-    group_date_final = np.array(group_date_finale)
-    return group_date_final
+    #Save the list of names separated EO vs EC
+    listPATHEC = []
+    listPATHEO = []
+    #Save only the set files given that in the upload they automaticly search for the .fdt
+    for root, dirs, files in os.walk(str(basePATH)):
+        for filename in files:
+            if '.set' in filename:
+                if 'EC' in filename:
+                    listPATHEC.append(filename)
+                if 'EO' in filename:
+                    listPATHEO.append(filename)
+    #Save again but sorted by the name that way we know they are in order
+    sorted_list_EO = sorted(listPATHEO)
+    sorted_list_EC = sorted(listPATHEC)
 
 
 
-'''FOR THE EPOCH'''
-#TO FIND THE NEAREST POSITION OF THE DATA THAT CORESPOND TO THE ONE INTRODUCED.
-def find_nearest(array,value): 
-       idx = (np.abs(array-value)).argmin()
-       return int(idx)
+    #ONCE WE HAVE THE NAMES IS TIME TO UPLOAD THE DATA
+    #Variable were we will have all the patients with their EO and EC respective.
+    EO_EC_Pacients = []
+    Chanels = []
 
-#EXTRACT THE t FROM THE DATA
-def grabt(dat):
-    Fs = 250.0
-    Ts = 1.0/Fs
-    t = np.arange(len(dat)) / Fs
-    return t
+    for i in sorted_list_EO:
+        #Load the doc
+        x=mne.io.read_raw_eeglab(basePATH+i, preload=True, verbose=True)
+        #GET DATA
+        EO = x._data
+        #GET CHANELS
+        chanles_names_EO = x.ch_names
+
+        #Select the same but with EC
+        EC_name = [sorted_list_EC.index(e) for e in sorted_list_EC if i[:-6] in e]
+        EC_name_PATH = sorted_list_EC[EC_name[0]]
+        #LOAD EC
+        x2=mne.io.read_raw_eeglab(basePATH+EC_name_PATH, preload=True, verbose=True)
+        #GET DATA
+        EC = x2._data
+        #GET CHANELS
+        chanles_names_EC = x2.ch_names
+
+        #save
+        EO_EC_P = []
+        EO_EC_P.append(EO)
+        EO_EC_P.append(EC)
+        EO_EC_Pacients.append(EO_EC_P)
+        chan = []
+        chan.append(chanles_names_EO)
+        chan.append(chanles_names_EC)
+        Chanels.append(chan)
     
-def epoch_return(groups_date_finalle2):
-    epoch_dat=[]
-    for data in groups_date_finalle2:
-        Fs = 250.0
-        Ts = 1.0/Fs
-        t = np.arange(len(data)) / Fs
-
-        n = len(data) # length of the signal
-        k = np.arange(n)
-        T = n/Fs
-        frq = k/T # two sides frequency range
-        frq = frq[range(int(n/2))]
-
-        Y = np.fft.fft(data)/n
-        Y = Y[range(int(n/2))]
-        save_epoc_data = []
-        save_epoc_temps = []
-        tinici = 0
-        tfinal = 1250
-        for i in range(0,int(int(T)/5)):
-            #FROM THE CHANEL SELECTED EXTRACT THE t DATA
-            t = grabt(data)
-
-            #SELECT FROM t AND group_date THE DATA FROM POSITIONS tinici to tfinal
-            epoc_temps = t[tinici:tfinal]
-            epoc_data = data[tinici:tfinal]
-
-            save_epoc_data.append(epoc_data)
-            save_epoc_temps.append(epoc_temps)    
-
-            tfinal=tfinal+1250
-            tinici= tinici+1250
-        epoch_dat.append(save_epoc_data)
-    return epoch_dat
-
+    return(sorted_list_EO, sorted_list_EC, EO_EC_Pacients, Chanels)
 
 #UPLOAD ALL THE FILES OF THE PATIENS IN A LIST LIKE THE FOLLOWING:
-#Subject = EO_EC_Pacients[S] max=15
+#Subject = EO_EC_Pacients[S] 
 #EO = EO_EC_Pacients[S][0]
 #EC = EO_EC_Pacients[S][1]
-#Channel = EO_EC_Pacients[0][1][Num] max=12
+#Channel = EO_EC_Pacients[0][1][Num] 
+
+#Subject = Chanels[S] 
+#EO_Chanels_Names = Chanels[S][0]
+#EC_Chanels_Names = Chanels[S][1]
+#Channel_Name = Chanels[0][1][Num] 
 basePATH = 'Files/Preprocessed/'
-sorted_list_EO, sorted_list_EC, EO_EC_Pacients = Import_Patients(basePATH)
+sorted_list_EO, sorted_list_EC, EO_EC_Pacients,Chanels = Import_Patients(basePATH)
 print(len(sorted_list_EO))
 
