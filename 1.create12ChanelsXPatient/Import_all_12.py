@@ -31,7 +31,6 @@ def upperchanel(chanlesnames):
 #DEF GRUP INFO DE CADA COMPONENT
 def group_inf(nomgroup, data_chan, upperchanels):
     group_date = []
-
     for e in nomgroup:
         if e in upperchanels:
             num = upperchanels.index(e)
