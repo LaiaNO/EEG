@@ -1,0 +1,163 @@
+
+'-' <- Folders
+'1.' <- Files
+
+- 12_Chanels: (3 files txt) (1 jupiter) (2 files python)
+
+    1. Create_txt_12.ipynb 
+            Return the EO_EC_Pacients_save.txt, sorted_list_ECsave.txt, sorted_list_EOsave.txt
+
+    2. EO_EC_Pacients_save.txt 
+            List of all the patients, each one with EO and EC, with their num. of chanels reduced to 12. Ordered by name
+            Len = 185 (num. of patients)
+            Len EO_EC_Pacients_up[x] = 2
+            Len EO_EC_Pacients_up[x][0/1] = 12
+            Len EO_EC_Pacients_up[x][0/1][0/11] = 120000 - 104000
+
+    3. sorted_list_ECsave.txt
+            Name of the EC files in name order.
+
+    4. sorted_list_E0save.txt
+            Name of the EO files ordered in the name file.
+
+    5. Definicions.py
+
+    6. Import_all_12.py
+
+
+
+- 12_Chanels_Banpower: (Sistem of calculating the banpower 1) (2 files txt)
+
+    1. BandPower_Calcul_EPoch.py
+
+    2. Cteate_txt_Banpower_Epoch.ipynb
+
+    3. List_epoch_6band.txt
+            List of all the 12 chanels, each one with the diferent bandpowers, each bandpower have all the patiens of that selection.
+            Len (List_epoch_6band)= 12 (12 chanels)
+            Len of one chanel (List_epoch_6band[x]) = 6 (alpha, theta, gama, ...)
+            Len of one band power (List_epoch_6band[x][x]) = 185 (patients)
+ 
+    4. List2_epoch_6band.txt (Sistem of calculating the banpower 2) (2 files txt))
+            List of all the 12 chanels, each one with the diferent bandpowers, each bandpower have all the patiens of that selection.
+            Len (List_epoch_6band)= 12 (12 chanels)
+            Len of one chanel (List_epoch_6band[x]) = 6 (alpha, theta, gama, ...)
+            Len of one band power (List_epoch_6band[x][x]) = 185 (patients)
+                
+
+- 60_Chanels:
+
+    1. 60_Chanels.txt
+
+
+
+-Files_EEG:
+
+    - Preproced_EEG (all the patients fils) (59 i 62 chanels (conant des de 1 (no 0)))
+        1. sub-010003_EC.fdt
+        2. sub-010003_EC.set
+        3. sub-010003_EO.fdt
+        4. sub-010003_EO.set
+        .
+        .
+        .
+        185. sub-010321_EO.set
+
+    TEIQue-SF.csv
+
+
+
+-MNE_Program:
+
+    1. mne_dat.txt
+
+    2. Create_TXT_MNE_Epoch.ipynb
+
+
+
+- ProgramaFinal (program files - Python)
+
+
+    
+
+
+# eeglab
+# pyEEG
+    https://www.hindawi.com/journals/cin/2011/406391/ 
+    
+# eegkit (R)
+
+
+
+·# tornar a descargar archius banpower pero sense lultima barra i els nous valors
+
+# crear el loop mne i extreure els nous archius banpower
+
+# Str in the barplot
+
+.# check the chanels <- quin falta? es repeteix?
+                {'Fp1': 178,
+                'Fp2': 177,
+                'F7': 174,
+                'F3': 184,
+                'Fz': 181,
+                'F4': 185,
+                'F8': 182,
+                'FC5': 183,
+                'FC1': 181,
+                'FC2': 184,
+                'FC6': 180,
+                'T7': 169,
+                'C3': 185,
+                'Cz': 176,
+                'C4': 185,
+                'T8': 169,
+                'CP5': 185,
+                'CP1': 182,
+                'CP2': 182,
+                'CP6': 177,
+                'AFz': 183,
+                'P7': 184,
+                'P3': 184,
+                'Pz': 185,
+                'P4': 185,
+                'P8': 185,
+                'PO9': 179,
+                'O1': 183,
+                'Oz': 185,
+                'O2': 184,
+                'PO10': 178,
+                'AF7': 178,
+                'AF3': 185,
+                'AF4': 184,
+                'AF8': 181,
+                'F5': 183,
+                'F1': 184,
+                'F2': 184,
+                'F6': 183,
+                'FT7': 184,
+                'FC3': 183,
+                'FC4': 183,
+                'FT8': 178,
+                'C5': 185,
+                'C1': 184,
+                'C2': 185,
+                'C6': 184,
+                'TP7': 182,
+                'CP3': 185,
+                'CPz': 184,
+                'CP4': 183,
+                'TP8': 183,
+                'P5': 185,
+                'P1': 185,
+                'P2': 185,
+                'P6': 185,
+                'PO7': 183,
+                'PO3': 185,
+                'POz': 184,
+                'PO4': 185,
+                'PO8': 185}
+
+# big table of table of all the extracted data (bandpower.py)  (and finalize with the eo vs. ec)
+# eo vs. eo (is there any diference in the eo/ec  con. (info) in the low vs high??? <- )
+# check well-being eeg signals. <- so we can try to estimated.
