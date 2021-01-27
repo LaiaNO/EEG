@@ -17,8 +17,6 @@ from scipy import stats
 import statsmodels.api as sm
 import numpy as np
 import matplotlib.pyplot as plt
-from numpy import asarray
-from numpy import savetxt
 
 
 '''FOR THE INITIAL DATA TREATMENT'''
@@ -95,6 +93,10 @@ def Import_Patients(basePATH):
     sfreq = 250
     info = mne.create_info(ch_names=titlegrup, sfreq=sfreq, ch_types=ct_ty)
 
+
+
+
+
     ###READ FILES IN THE FOLDER AND SAVE THEM
 
     #Save the list of names separated EO vs EC
@@ -111,6 +113,8 @@ def Import_Patients(basePATH):
     #Save again but sorted by the name that way we know they are in order
     sorted_list_EO = sorted(listPATHEO)
     sorted_list_EC = sorted(listPATHEC)
+
+
 
 
 
@@ -147,13 +151,3 @@ def Import_Patients(basePATH):
         EO_EC_Pacients.append(EO_EC_P)
     
     return(sorted_list_EO, sorted_list_EC, EO_EC_Pacients)
-
-#UPLOAD ALL THE FILES OF THE PATIENS IN A LIST LIKE THE FOLLOWING:
-#Subject = EO_EC_Pacients[S] max=15
-#EO = EO_EC_Pacients[S][0]
-#EC = EO_EC_Pacients[S][1]
-#Channel = EO_EC_Pacients[0][1][Num] max=12
-basePATH = 'Files/Preprocessed/'
-sorted_list_EO, sorted_list_EC, EO_EC_Pacients = Import_Patients(basePATH)
-print(len(sorted_list_EO))
-
