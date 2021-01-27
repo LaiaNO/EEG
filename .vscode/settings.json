@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/Users/laianavarroolivella/opt/anaconda3/bin/python",
+    "python.pythonPath": "/Users/laianavarroolivella/opt/anaconda3/envs/mne/bin/python",
     "jupyter.jupyterServerType": "local"
 }
