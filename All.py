@@ -328,7 +328,7 @@ print(len(sorted_list_EO))
 
 p1O, p2O, p3O, p4O, p5O = BanPoer_Epoch(EO_EC_Pacients, 0)
 p1C, p2C, p3C, p4C, p5C = BanPoer_Epoch(EO_EC_Pacients, 1)
-
+print(len(p1C))
 listageneralO = []
 listageneralC = []
 
@@ -336,7 +336,7 @@ listageneralO.append(p2O)
 listageneralO.append(p3O)
 listageneralO.append(p4O)
 listageneralO.append(p5O)
-
+print(len(listageneralO))
 listageneralC.append(p2C)
 listageneralC.append(p3C)
 listageneralC.append(p4C)
@@ -347,11 +347,11 @@ list_finalO = []
 list_finalC.append(listageneralC)
 list_finalO.append(listageneralO)
 
-with open("list_finalC.txt", "wb") as fp:   #Pickling
+with open("/Users/laianavarroolivella/Proyectos/EEG/All.py/list_finalC.txt", "wb") as fp:   #Pickling
     pickle.dump(list_finalC, fp)
 
 
-with open("list_finalO.txt", "wb") as fp:   #Pickling
+with open("/Users/laianavarroolivella/Proyectos/EEG/All.py/list_finalO.txt", "wb") as fp:   #Pickling
     pickle.dump(list_finalO, fp)
 
 print("Finish")
