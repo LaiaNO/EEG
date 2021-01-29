@@ -325,7 +325,7 @@ basePATH = '/Users/laianavarroolivella/Proyectos/EEG/Files_EEG/Preprocessed/'
 sorted_list_EO, sorted_list_EC, EO_EC_Pacients, Chanels = Import_Patients(basePATH)
 print(len(sorted_list_EO))
 
-'''
+
 p1O, p2O, p3O, p4O, p5O = BanPoer_Epoch(EO_EC_Pacients, 0)
 p1C, p2C, p3C, p4C, p5C = BanPoer_Epoch(EO_EC_Pacients, 1)
 print(len(p1C))
@@ -349,7 +349,10 @@ list_finalO.append(listageneralO)
 
 with open("/Users/laianavarroolivella/Proyectos/EEG/list_finalC.txt", "wb") as fp:   #Pickling
     pickle.dump(list_finalC, fp)
-'''
+
+with open("/Users/laianavarroolivella/Proyectos/EEG/list_finalO.txt", "wb") as fp:   #Pickling
+    pickle.dump(list_finalO, fp)
+
 
 with open("/Users/laianavarroolivella/Proyectos/EEG/Chanels.txt", "wb") as fp:   #Pickling
     pickle.dump(Chanels, fp)
