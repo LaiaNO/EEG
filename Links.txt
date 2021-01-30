@@ -36,3 +36,7 @@ https://neuroimage.usc.edu/brainstorm/Introduction #program
 #https://www.psychometriclab.com/adminsdata/files/The%20TEIQue-SF%20v.%201.50.pdf TEIQue-SF
 
 #Functions
+
+
+#EEg mu. regresion
+# https://www.biorxiv.org/content/10.1101/845016v1.full
