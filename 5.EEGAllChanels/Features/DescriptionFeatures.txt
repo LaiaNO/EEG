@@ -1,0 +1,12 @@
+Find attached the data for Laia. The files contained are as follows:
+
+Feature_array_EC_norm = Eyes closed normalised features
+Feature_array_EO_norm = Eyes open normalised features
+Feature_array_EC_no_norm = Eyes closed raw features
+Feature_array_EO_no_norm = Eyes open raw features
+
+Each file contains 3 columns with the Valence,Arousal,Motivation for each subject.
+
+Attached also are 2 files (Sub_idx_EC,Sub_idc_EO) that contain the index of the subject from the original list of 186 subjects, as some of the subjects were discarded for not having the required channels to calculate the features.
+
+Files can be opened using pickle. 
