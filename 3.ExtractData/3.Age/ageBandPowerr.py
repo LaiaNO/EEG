@@ -176,6 +176,9 @@ def plotbar_info_bandpower1 (names, sorted_list_EO, TeiQueSF_emotionality, gende
 
     plt.show()
 
+
+  
+
     return max_5_1, max_5_2, max_5_3
 
 
