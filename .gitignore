@@ -172,6 +172,10 @@ dmypy.json
 .prof
 
 #txt
-.txt
+EO_EC_Pacients_save.txt
+sorted_list_EOsave.txt
+sorted_list_ECsave.txt
+list_finalEO.txt
+list_finalEC.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,python
