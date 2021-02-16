@@ -172,9 +172,9 @@ dmypy.json
 .prof
 
 #txt
-EO_EC_Pacients_save.txt
-sorted_list_EOsave.txt
-sorted_list_ECsave.txt
+EO_EC_Data.txt
+sorted_list_EO.txt
+sorted_list_EC.txt
 list_finalEO.txt
 list_finalEC.txt
 
