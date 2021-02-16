@@ -1,7 +1,7 @@
 import matplotlib
-import matplotlib.pyplot as plt # plotting
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import matplotlib.pyplot as plt  # plotting
+import numpy as np  # linear algebra
+import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 import scipy
 import scipy.interpolate
 import scipy
@@ -20,9 +20,103 @@ from numpy import asarray
 from numpy import savetxt
 import scipy.cluster
 
-from Definicions import find_nearest
-from Definicions import grabt
-from Definicions import epoch_return
+from scipy.signal import welch
+from scipy.integrate import simps
+
+'''FOR THE EPOCH: Little definitons.'''
+
+
+# TO FIND THE NEAREST POSITION OF THE DATA THAT CORESPOND TO THE ONE INTRODUCED.
+def find_nearest(array, value):
+    idx = (np.abs(array-value)).argmin()
+    return int(idx)
+
+
+def grabt(data):  # EXTRACT THE t FROM THE DATA
+    Fs = 250.0
+    #Ts = 1.0/Fs
+    t = np.arange(len(data)) / Fs
+    return t
+
+
+def epoch_return(chanels, numchanel):
+    '''  
+    chanels = the 12 brain reagions; Len chanels[0/11] = 120000 - 104000 (domain amplitude)
+    numchanel = channel number [0/11]
+    '''
+    data = chanels[numchanel]  # Select the data of the chanel
+    Fs = 250.0
+    # Ts = 1.0/Fs
+    n = len(data)  # length of the signal
+    #t = np.arange(n) / Fs
+    #k = np.arange(n)
+    T = n/Fs
+    #T= t/n
+
+    save_epoc_data = []
+    # save_epoc_temps = []
+    tinici = 0
+    tfinal = 1250
+    for i in range(0, int(int(T)/5)):
+        # for i in range(0,int(int(t)/5)):
+        # FROM THE CHANEL SELECTED EXTRACT THE t DATA
+        #t = grabt(data)
+
+        # SELECT FROM t AND group_date THE DATA FROM POSITIONS tinici to tfinal
+        #epoc_temps = t[tinici:tfinal]
+        epoc_data = data[tinici:tfinal]
+
+        save_epoc_data.append(epoc_data)
+        # save_epoc_temps.append(epoc_temps)
+
+        tfinal = tfinal+1250
+        tinici = tinici+1250
+    # epoch_dat.append(save_epoc_data)
+    return save_epoc_data
+
+
+'''EPOCHS CRETION AND BANDPOWER EXTRACTION'''
+
+'''
+def epoch_return_todo(groups_date_finalle2, numchanel):
+    epoch_dat = []
+    for data in groups_date_finalle2:
+        Fs = 250.0
+        Ts = 1.0/Fs
+        t = np.arange(len(data)) / Fs
+
+        n = len(data)  # length of the signal
+        k = np.arange(n)
+        T = n/Fs
+        # frq = k/T # two sides frequency range
+        #frq = frq[range(int(n/2))]
+        #Y = np.fft.fft(data)/n
+        #Y = Y[range(int(n/2))]
+
+        save_epoc_data = []
+        save_epoc_temps = []
+        tinici = 0
+        tfinal = 1250
+        for i in range(0, int(int(T)/5)):
+            # FROM THE CHANEL SELECTED EXTRACT THE t DATA
+            t = grabt(data)
+
+            # SELECT FROM t AND group_date THE DATA FROM POSITIONS tinici to tfinal
+            #epoc_temps = t[tinici:tfinal]
+            epoc_data = data[tinici:tfinal]
+
+            save_epoc_data.append(epoc_data)
+            # save_epoc_temps.append(epoc_temps)
+
+            tfinal = tfinal+1250
+            tinici = tinici+1250
+        # epoch_dat.append(save_epoc_data)
+    return save_epoc_data'''
+
+
+'''def collect(l, index):
+   return map(itemgetter(index), l)'''
+
 
 def bandpower(data, sf, band, window_sec=None, relative=False):
     """Compute the average power of the signal x in a specific frequency band.
@@ -45,11 +139,9 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
     bp : float
         Absolute or relative band power.
     """
-    from scipy.signal import welch
-    from scipy.integrate import simps
+
     band = np.asarray(band)
     low, high = band
-
 
     # Define window length
     if window_sec is not None:
@@ -59,42 +151,37 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
 
     # Compute the modified periodogram (Welch)
     freqs, psd = welch(data, sf, nperseg=nperseg)
-    #print('freqs', freqs)
-    #print('psd', psd)
 
     # Frequency resolution
     freq_res = freqs[1] - freqs[0]
-    #print('frq',freq_res)
-    
-    #ok
+
     # Find closest indices of band in frequency vector
     idx_band = np.logical_and(freqs >= low, freqs <= high)
-    #print('ind', idx_band)
 
     # Integral approximation of the spectrum using Simpson's rule.
     bp = simps(psd[idx_band], dx=freq_res)
-    #print('bp', bp)
 
     if relative:
         bp /= simps(psd, dx=freq_res)
     return bp
-
-import scipy 
 
 # x=datos
 # fs=sample frequency
 # fmin=min frequency
 # fmax=max frequency
 
-def bandpower2(x, fs, fmin, fmax):
-    f, Pxx = scipy.signal.periodogram(x, fs=fs)
-    ind_min = scipy.argmax(f > fmin) - 1
-    ind_max = scipy.argmax(f > fmax) - 1
-    return scipy.trapz(Pxx[ind_min: ind_max], f[ind_min: ind_max])
 
-
-def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
-
+def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
+    '''
+    EO_EC_Data:
+        List of all the patients, each one with EO and EC, with their num. of chanels reduced to 12. Ordered by name
+        Len = 187 (num. of patients)
+        Len EO_EC_Data[x] = 2
+        Len EO_EC_Data[x][0/1] = 12
+        Len EO_EC_Data[x][0/1][0/11] = 120000 - 104000
+    numchanel: The Brain Ragions selected of each patient. 
+    EOorEC: Select if we what the EO or the EC data from EO_EC_Data
+    '''
     pacient_beta_EO = []
     pacient_alpha_EO = []
     pacient_gama_l_EO = []
@@ -102,10 +189,8 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
     pacient_theta_EO = []
     pacient_delta_EO = []
 
-    
-
-    for pacient in EO_EC_Pacients:
-        EO_Epochs = epoch_return(pacient[eovsEO], numchanel)
+    for pacient in EO_EC_Data:
+        EO_Epochs = epoch_return(pacient[EOorEC], numchanel)
         chanels_betta = []
         chanels_gama_u = []
         chanels_gama_l = []
@@ -114,26 +199,31 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
         chanels_delta = []
 
         for epoch in EO_Epochs:
-            
-            #gamma upper
-            f_gama_upper = bandpower(epoch, 250, [45, 250], window_sec=1, relative=True)
+
+            # gamma upper
+            f_gama_upper = bandpower(
+                epoch, 250, [45, 250], window_sec=1, relative=True)
             chanels_gama_u.append(f_gama_upper)
-            #gamma lower
-            f_gama_lower = bandpower(epoch, 250, [30, 45], window_sec=1, relative=True)
+            # gamma lower
+            f_gama_lower = bandpower(
+                epoch, 250, [30, 45], window_sec=1, relative=True)
             chanels_gama_l.append(f_gama_lower)
-            #beta
-            f_beta = bandpower(epoch, 250,[12, 30], window_sec=1, relative=True)
+            # beta
+            f_beta = bandpower(
+                epoch, 250, [12, 30], window_sec=1, relative=True)
             chanels_betta.append(f_beta)
-            #alpha
-            f_alpha = bandpower(epoch, 250, [8, 12], window_sec=1, relative=True)
+            # alpha
+            f_alpha = bandpower(
+                epoch, 250, [8, 12], window_sec=1, relative=True)
             chanels_alpha.append(f_alpha)
-            #theta
-            f_theta = bandpower(epoch, 250, [4, 8], window_sec=1, relative=True)
+            # theta
+            f_theta = bandpower(
+                epoch, 250, [4, 8], window_sec=1, relative=True)
             chanels_theta.append(f_theta)
-            #delta
-            f_delta = bandpower(epoch, 250, [2, 4], window_sec=1, relative=True)
+            # delta
+            f_delta = bandpower(
+                epoch, 250, [2, 4], window_sec=1, relative=True)
             chanels_delta.append(f_delta)
-                
 
         mean_x = statistics.median(chanels_betta)
         mean_l = statistics.median(chanels_gama_l)
@@ -149,64 +239,4 @@ def BanPoer_Epoch(EO_EC_Pacients, numchanel, eovsEO):
         pacient_theta_EO.append(mean_o)
         pacient_delta_EO.append(mean_p)
         #chanels1_delta_EO, chanels1_theta_EO, chanels1_alpha_EO, chanels1_beta_EO, chanels1_gama_EO
-    return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO 
-
-# EO_EC_Pacients=array 4D
-def BanPoer_Epoch2(EO_EC_Pacients, numchanel, eovsEO):
-
-    pacient_beta_EO = []
-    pacient_alpha_EO = []
-    pacient_gama_l_EO = []
-    pacient_gama_u_EO = []
-    pacient_theta_EO = []
-    pacient_delta_EO = []
-
-    
-
-    for pacient in EO_EC_Pacients:
-        EO_Epochs = epoch_return(pacient[eovsEO], numchanel)
-
-        chanels_betta = []
-        chanels_gama_u = []
-        chanels_gama_l = []
-        chanels_alpha = []
-        chanels_theta = []
-        chanels_delta = []
-
-        for epoch in EO_Epochs:
-            
-            #gamma upper
-            f_gama_upper = bandpower2(epoch, 250, 80, 250)
-            chanels_gama_u.append(f_gama_upper)
-            #gamma lower
-            f_gama_lower = bandpower2(epoch, 250, 30, 45)
-            chanels_gama_l.append(f_gama_lower)
-            #beta
-            f_beta = bandpower2(epoch, 250, 12, 30)
-            chanels_betta.append(f_beta)
-            #alpha
-            f_alpha = bandpower2(epoch, 250, 8, 12)
-            chanels_alpha.append(f_alpha)
-            #theta
-            f_theta = bandpower2(epoch, 250, 4, 8)
-            chanels_theta.append(f_theta)
-            #delta
-            f_delta = bandpower2(epoch, 250, 2, 4)
-            chanels_delta.append(f_delta)
-                
-
-        mean_x = statistics.median(chanels_betta)
-        mean_l = statistics.median(chanels_gama_l)
-        mean_y = statistics.median(chanels_gama_u)
-        mean_t = statistics.median(chanels_alpha)
-        mean_o = statistics.median(chanels_theta)
-        mean_p = statistics.median(chanels_delta)
-
-        pacient_beta_EO.append(mean_x)
-        pacient_alpha_EO.append(mean_t)
-        pacient_gama_u_EO.append(mean_y)
-        pacient_gama_l_EO.append(mean_l)
-        pacient_theta_EO.append(mean_o)
-        pacient_delta_EO.append(mean_p)
-
-    return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO 
+    return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO
