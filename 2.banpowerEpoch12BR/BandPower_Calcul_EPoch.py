@@ -39,9 +39,6 @@ def epoch_return(chanels, numchanel):
     n = len(data)  # length of the signal
     T = n/Fs  # Period in time domain
 
-    print('Len dat,', n)
-    print('T,', T)
-
     save_epoc_data = []
     tinici = 0
     tfinal = 1250
