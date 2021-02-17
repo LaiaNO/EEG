@@ -23,99 +23,39 @@ import scipy.cluster
 from scipy.signal import welch
 from scipy.integrate import simps
 
-'''FOR THE EPOCH: Little definitons.'''
-
-
-# TO FIND THE NEAREST POSITION OF THE DATA THAT CORESPOND TO THE ONE INTRODUCED.
-def find_nearest(array, value):
-    idx = (np.abs(array-value)).argmin()
-    return int(idx)
-
-
-def grabt(data):  # EXTRACT THE t FROM THE DATA
-    Fs = 250.0
-    #Ts = 1.0/Fs
-    t = np.arange(len(data)) / Fs
-    return t
+'''FOR THE EPOCH definiton.'''
 
 
 def epoch_return(chanels, numchanel):
-    '''  
+    """ Return the data devided by epochs of 5 sec.
+    Parameters
+    ---------- 
     chanels = the 12 brain reagions; Len chanels[0/11] = 120000 - 104000 (domain amplitude)
     numchanel = channel number [0/11]
-    '''
+    # Other features not included in the analisis; Ts = 1.0/Fs  # Sampling Time // t = np.arange(n)/Fs  # Time  // #T = t/n
+    """
     data = chanels[numchanel]  # Select the data of the chanel
-    Fs = 250.0
-    # Ts = 1.0/Fs
+    Fs = 250.0  # Our frequency sample
     n = len(data)  # length of the signal
-    #t = np.arange(n) / Fs
-    #k = np.arange(n)
-    T = n/Fs
-    #T= t/n
+    T = n/Fs  # Period in time domain
+
+    print('Len dat,', n)
+    print('T,', T)
 
     save_epoc_data = []
-    # save_epoc_temps = []
     tinici = 0
     tfinal = 1250
     for i in range(0, int(int(T)/5)):
-        # for i in range(0,int(int(t)/5)):
-        # FROM THE CHANEL SELECTED EXTRACT THE t DATA
-        #t = grabt(data)
-
-        # SELECT FROM t AND group_date THE DATA FROM POSITIONS tinici to tfinal
-        #epoc_temps = t[tinici:tfinal]
+        # SELECT FROM group_date THE DATA FROM POSITIONS tinici to tfinal
         epoc_data = data[tinici:tfinal]
-
         save_epoc_data.append(epoc_data)
-        # save_epoc_temps.append(epoc_temps)
 
         tfinal = tfinal+1250
         tinici = tinici+1250
-    # epoch_dat.append(save_epoc_data)
     return save_epoc_data
 
 
-'''EPOCHS CRETION AND BANDPOWER EXTRACTION'''
-
-'''
-def epoch_return_todo(groups_date_finalle2, numchanel):
-    epoch_dat = []
-    for data in groups_date_finalle2:
-        Fs = 250.0
-        Ts = 1.0/Fs
-        t = np.arange(len(data)) / Fs
-
-        n = len(data)  # length of the signal
-        k = np.arange(n)
-        T = n/Fs
-        # frq = k/T # two sides frequency range
-        #frq = frq[range(int(n/2))]
-        #Y = np.fft.fft(data)/n
-        #Y = Y[range(int(n/2))]
-
-        save_epoc_data = []
-        save_epoc_temps = []
-        tinici = 0
-        tfinal = 1250
-        for i in range(0, int(int(T)/5)):
-            # FROM THE CHANEL SELECTED EXTRACT THE t DATA
-            t = grabt(data)
-
-            # SELECT FROM t AND group_date THE DATA FROM POSITIONS tinici to tfinal
-            #epoc_temps = t[tinici:tfinal]
-            epoc_data = data[tinici:tfinal]
-
-            save_epoc_data.append(epoc_data)
-            # save_epoc_temps.append(epoc_temps)
-
-            tfinal = tfinal+1250
-            tinici = tinici+1250
-        # epoch_dat.append(save_epoc_data)
-    return save_epoc_data'''
-
-
-'''def collect(l, index):
-   return map(itemgetter(index), l)'''
+'''BANDPOWER EXTRACTION'''
 
 
 def bandpower(data, sf, band, window_sec=None, relative=False):
@@ -165,14 +105,14 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
         bp /= simps(psd, dx=freq_res)
     return bp
 
-# x=datos
-# fs=sample frequency
-# fmin=min frequency
-# fmax=max frequency
+
+'''Execute all'''
 
 
 def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
-    '''
+    """ Return the BandPower for each epoch for each Band.
+    Parameters
+    ---------- 
     EO_EC_Data:
         List of all the patients, each one with EO and EC, with their num. of chanels reduced to 12. Ordered by name
         Len = 187 (num. of patients)
@@ -181,7 +121,7 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
         Len EO_EC_Data[x][0/1][0/11] = 120000 - 104000
     numchanel: The Brain Ragions selected of each patient. 
     EOorEC: Select if we what the EO or the EC data from EO_EC_Data
-    '''
+    """
     pacient_beta_EO = []
     pacient_alpha_EO = []
     pacient_gama_l_EO = []
