@@ -1,57 +1,70 @@
 
-'-' <- Folders
-'1.' <- Files
+'1.' <- Folders
+'-' <- Files
 
-- 12_Chanels: (3 files txt) (1 jupiter) (2 files python)
-
-    1. Create_txt_12.ipynb 
+1.create12ChanelsXPatient (3 files txt) (1 jupiter) (1 files python)
+    - Create_txt_12.ipynb
             Return the EO_EC_Pacients_save.txt, sorted_list_ECsave.txt, sorted_list_EOsave.txt
 
-    2. EO_EC_Pacients_save.txt 
+    - Import_all_12.py
+            -------------------
+
+    - EO_EC_Data.txt 
             List of all the patients, each one with EO and EC, with their num. of chanels reduced to 12. Ordered by name
-            Len = 185 (num. of patients)
+            Len = 187 (num. of patients)
             Len EO_EC_Pacients_up[x] = 2
             Len EO_EC_Pacients_up[x][0/1] = 12
             Len EO_EC_Pacients_up[x][0/1][0/11] = 120000 - 104000
 
-    3. sorted_list_ECsave.txt
+    - sorted_list_E0.txt
             Name of the EC files in name order.
 
-    4. sorted_list_E0save.txt
+    - sorted_list_EC.txt
             Name of the EO files ordered in the name file.
 
-    5. Definicions.py
+    
+2. banpowerEpoch12BR
+    - BandPower_Calcul_EPoch.py  &  Definicions.py (fer machambre)
+    
+    - Cteate_txt_Banpower_Epoch.ipynb
 
-    6. Import_all_12.py
-
-
-
-- 12_Chanels_Banpower: (Sistem of calculating the banpower 1) (2 files txt)
-
-    1. BandPower_Calcul_EPoch.py
-
-    2. Cteate_txt_Banpower_Epoch.ipynb
-
-    3. List_epoch_6band.txt
-            List of all the 12 chanels, each one with the diferent bandpowers, each bandpower have all the patiens of that selection.
-            Len (List_epoch_6band)= 12 (12 chanels)
-            Len of one chanel (List_epoch_6band[x]) = 6 (alpha, theta, gama, ...)
-            Len of one band power (List_epoch_6band[x][x]) = 185 (patients)
+    - listEpoch6Band_EO.txt
+        List of all the 12 chanels, each one with the diferent bandpowers, each bandpower have all the patiens of that selection.
+        Len (List_epoch_6band)= 12 (12 chanels)
+        Len of one chanel (List_epoch_6band[x]) = 6 (alpha, theta, gama, ...)
+        Len of one band power (List_epoch_6band[x][x]) = 185 (patients)
  
-    4. List2_epoch_6band.txt (Sistem of calculating the banpower 2) (2 files txt))
+    - listEpoch6Band_EC.txt (Sistem of calculating the banpower 2) (2 files txt))
             List of all the 12 chanels, each one with the diferent bandpowers, each bandpower have all the patiens of that selection.
             Len (List_epoch_6band)= 12 (12 chanels)
             Len of one chanel (List_epoch_6band[x]) = 6 (alpha, theta, gama, ...)
             Len of one band power (List_epoch_6band[x][x]) = 185 (patients)
-                
 
-- 60_Chanels:
+            
+3. ExtractData
+    3.1 General
 
-    1. 60_Chanels.txt
+    3.2 Gender
+
+    3.3 Age
+
+    3.4 3vs5
+
+    3.5 Outliers
+
+    - META:File_IDs_Age_Gender
 
 
+4. Classifitator
+    4.1 Regression
 
--Files_EEG:
+    4.2 SVM
+
+
+5. EEGAllChanels
+
+
+6. Files_EEG:
 
     - Preproced_EEG (all the patients fils) (59 i 62 chanels (conant des de 1 (no 0)))
         1. sub-010003_EC.fdt
@@ -66,18 +79,7 @@
     TEIQue-SF.csv
 
 
-
--MNE_Program:
-
-    1. mne_dat.txt
-
-    2. Create_TXT_MNE_Epoch.ipynb
-
-
-
-- ProgramaFinal (program files - Python)
-
-
+7. Procediments
     
 
 
