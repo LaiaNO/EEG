@@ -56,7 +56,8 @@ def epoch_return(chanels, numchanel):
 
 
 def bandpower(data, sf, band, window_sec=None, relative=False):
-    """Compute the average power of the signal x in a specific frequency band.
+    """ SOURCE: https://raphaelvallat.com/bandpower.html
+    Compute the average power of the signal x in a specific frequency band.
     Parameters
     ----------
     data : 1d-array
@@ -89,8 +90,7 @@ def bandpower(data, sf, band, window_sec=None, relative=False):
     # Compute the modified periodogram (Welch)
     freqs, psd = welch(data, sf, nperseg=nperseg)
 
-    # Frequency resolution
-    freq_res = freqs[1] - freqs[0]
+    freq_res = freqs[1] - freqs[0]  # Frequency resolution
 
     # Find closest indices of band in frequency vector
     idx_band = np.logical_and(freqs >= low, freqs <= high)
@@ -126,6 +126,8 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
     pacient_theta_EO = []
     pacient_delta_EO = []
 
+    returnEpochBR = []  # SAVE ALL THE BANDS
+
     for pacient in EO_EC_Data:
         EO_Epochs = epoch_return(pacient[EOorEC], numchanel)
         chanels_betta = []
@@ -136,7 +138,6 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
         chanels_delta = []
 
         for epoch in EO_Epochs:
-
             # gamma upper
             f_gama_upper = bandpower(
                 epoch, 250, [45, 250], window_sec=1, relative=True)
@@ -175,5 +176,12 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
         pacient_gama_l_EO.append(mean_l)
         pacient_theta_EO.append(mean_o)
         pacient_delta_EO.append(mean_p)
-        #chanels1_delta_EO, chanels1_theta_EO, chanels1_alpha_EO, chanels1_beta_EO, chanels1_gama_EO
-    return pacient_delta_EO, pacient_theta_EO, pacient_alpha_EO, pacient_beta_EO, pacient_gama_l_EO, pacient_gama_u_EO
+
+    returnEpochBR.append(pacient_delta_EO)
+    returnEpochBR.append(pacient_theta_EO)
+    returnEpochBR.append(pacient_alpha_EO)
+    returnEpochBR.append(pacient_beta_EO)
+    returnEpochBR.append(pacient_beta_EO)
+    returnEpochBR.append(pacient_gama_l_EO)
+    returnEpochBR.append(pacient_gama_u_EO)
+    return returnEpochBR
