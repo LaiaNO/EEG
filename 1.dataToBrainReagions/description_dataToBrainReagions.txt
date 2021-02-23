@@ -1,0 +1,24 @@
+
+'1.' <- Folders
+'-' <- Files
+
+(3 files txt) (1 jupiter) (1 files python)
+
+    - Create_txt_12.ipynb
+            Return the EO_EC_Pacients_save.txt, sorted_list_ECsave.txt, sorted_list_EOsave.txt
+
+    - Import_all_12.py
+            -------------------
+
+    - EO_EC_Data.txt 
+            List of all the patients, each one with EO and EC, with their num. of chanels reduced to 12. Ordered by name
+            Len = 187 (num. of patients)
+            Len EO_EC_Pacients_up[x] = 2
+            Len EO_EC_Pacients_up[x][0/1] = 12
+            Len EO_EC_Pacients_up[x][0/1][0/11] = 120000 - 104000
+
+    - sorted_list_E0.txt
+            Name of the EC files in name order.
+
+    - sorted_list_EC.txt
+            Name of the EO files ordered in the name file.

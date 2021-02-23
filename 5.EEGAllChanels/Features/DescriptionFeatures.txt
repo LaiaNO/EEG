@@ -1,4 +1,4 @@
-Find attached the data for Laia. The files contained are as follows:
+The files contained are as follows:
 
 Feature_array_EC_norm = Eyes closed normalised features
 Feature_array_EO_norm = Eyes open normalised features

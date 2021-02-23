@@ -40,3 +40,14 @@ https://neuroimage.usc.edu/brainstorm/Introduction #program
 
 #EEg mu. regresion
 # https://www.biorxiv.org/content/10.1101/845016v1.full
+
+
+
+#EEGLAB
+https://github.com/meagmohit/EEG-Datasets #data sets
+
+
+
+#https://www.biorxiv.org/content/10.1101/2020.10.02.323840v1.full com fer el esquema 
+
+#Functions
