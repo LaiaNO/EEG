@@ -122,7 +122,6 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
     pacient_beta_EO = []
     pacient_alpha_EO = []
     pacient_gama_l_EO = []
-    pacient_gama_u_EO = []
     pacient_theta_EO = []
     pacient_delta_EO = []
 
@@ -131,17 +130,12 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
     for pacient in EO_EC_Data:
         EO_Epochs = epoch_return(pacient[EOorEC], numchanel)
         chanels_betta = []
-        chanels_gama_u = []
         chanels_gama_l = []
         chanels_alpha = []
         chanels_theta = []
         chanels_delta = []
 
         for epoch in EO_Epochs:
-            # gamma upper
-            f_gama_upper = bandpower(
-                epoch, 250, [45, 250], window_sec=1, relative=True)
-            chanels_gama_u.append(f_gama_upper)
             # gamma lower
             f_gama_lower = bandpower(
                 epoch, 250, [30, 45], window_sec=1, relative=True)
@@ -165,14 +159,12 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
 
         mean_x = statistics.median(chanels_betta)
         mean_l = statistics.median(chanels_gama_l)
-        mean_y = statistics.median(chanels_gama_u)
         mean_t = statistics.median(chanels_alpha)
         mean_o = statistics.median(chanels_theta)
         mean_p = statistics.median(chanels_delta)
 
         pacient_beta_EO.append(mean_x)
         pacient_alpha_EO.append(mean_t)
-        pacient_gama_u_EO.append(mean_y)
         pacient_gama_l_EO.append(mean_l)
         pacient_theta_EO.append(mean_o)
         pacient_delta_EO.append(mean_p)
@@ -181,7 +173,5 @@ def BanPoer_Epoch(EO_EC_Data, numchanel, EOorEC):
     returnEpochBR.append(pacient_theta_EO)
     returnEpochBR.append(pacient_alpha_EO)
     returnEpochBR.append(pacient_beta_EO)
-    returnEpochBR.append(pacient_beta_EO)
     returnEpochBR.append(pacient_gama_l_EO)
-    returnEpochBR.append(pacient_gama_u_EO)
     return returnEpochBR

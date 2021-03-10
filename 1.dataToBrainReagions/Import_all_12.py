@@ -67,6 +67,11 @@ def opteciogrups(chanlesnames, groupp, data_chan):
     return group_date_final
 
 
+'''Execution'''
+
+# IMPOT FUNTION THAT RETURNS 3 LISTS: A LIST OF ALL PAIENTS DATA, LIST NAMES PATIENS EO, LIST NAMES PATIENS EC:
+
+
 def Import_Patients(basePATH):
 
     # DECLARE THE 12 CHANELS GROUPS WE WANT TO REDUCE THE 62 CHANELS
@@ -86,14 +91,6 @@ def Import_Patients(basePATH):
     # SAVE THIS 12 IN A MATRIX TO BE ITERATED LATER
     groups = [Anterior_midline, Left_frontal, Right_frontal, Left_temporal, Left_central, Left_parietal,
               Left_Occipital, Right_Occipital, Right_parietal, Right_temporal, Posterior_midline, Right_central]
-
-    # DECLARE WHAT TIPE ARE THIS CHANELS TO GO FROM NUMPY TO MNE
-    titlegrup = ["ch1", "ch2", "ch3", "ch4", "ch5", "ch6",
-                 "ch7", "ch8", "ch9", "ch10", "ch11", "ch12"]
-    ct_ty = ["eeg", "eeg", "eeg", "eeg", "eeg", "eeg",
-             "eeg", "eeg", "eeg", "eeg", "eeg", "eeg"]
-    sfreq = 250
-    info = mne.create_info(ch_names=titlegrup, sfreq=sfreq, ch_types=ct_ty)
 
     # READ FILES IN THE FOLDER AND SAVE THEM
 
