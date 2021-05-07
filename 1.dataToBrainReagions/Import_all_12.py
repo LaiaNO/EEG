@@ -20,11 +20,8 @@ import statsmodels.api as sm
 
 # DEFINITION UPPER CHANNEL (to have all at the same type):
 def upperchanel(chanlesnames):
-    upperchanels = []  # Create blank list
-    for i in chanlesnames:
-        r = i.upper()  # Transform to upper each chanel name
-        upperchanels.append(r)
-    return upperchanels
+    yourList = [x.upper() for x in chanlesnames]  # Upper the name chanels
+    return yourList
 
 
 # DEFINITION TO FIND IF THERE ARE ALL THE CHANELS WE DECLARE IN THE 12 GROUPS IN THE CHANELS GIVEN FOR EACH PATIENT
