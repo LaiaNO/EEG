@@ -51,3 +51,6 @@ https://github.com/meagmohit/EEG-Datasets #data sets
 #https://www.biorxiv.org/content/10.1101/2020.10.02.323840v1.full com fer el esquema 
 
 #Functions
+
+#Pyeeg
+https://github.com/forrestbao/pyeeg
