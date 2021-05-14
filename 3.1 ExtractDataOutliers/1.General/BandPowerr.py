@@ -142,8 +142,10 @@ def plotbar_info_bandpower1(names, sorted_list_EO, Test, list_bands, thTIPE):
     width = 0.35  # the width of the bars
 
     fig, ax = plt.subplots()
-    ax.bar(x - width/2, minus5, width, yerr=strmin, capsize=0.05, label='-4')
-    ax.bar(x + width/2, max5, width, yerr=strmax, capsize=0.05, label='+4')
+    ax.bar(x - width/2, minus5, width, yerr=strmin,
+           capsize=0.05, label='-'+str(thTIPE))
+    ax.bar(x + width/2, max5, width, yerr=strmax,
+           capsize=0.05, label='+'+str(thTIPE))
 
     # Add some text for labels, title and custom x-axis tick labels, etc.
     ax.set_ylabel('Band Power')
