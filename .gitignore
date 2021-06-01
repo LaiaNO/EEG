@@ -177,6 +177,27 @@ sorted_list_EO.txt
 sorted_list_EC.txt
 list_finalEO.txt
 list_finalEC.txt
+Listoflist_no_outliersEC.txt
+Listoflist_no_outliersEO.txt
+Listoflist_outliersEO.txt
+Listoflist_outliersEC.txt
+Dades_no_outliersEO.txt
+Dades_no_outliersEC.txt
+Dades_outliersEO.txt
+Dades_outliersEC.txt
+#what I send
+Chanels.txt
+list_finalC.txt
+list_finalO.txt
+#starlab
+Feature_array_EC_no_norm.p
+Feature_array_EO_no_norm.p
+Feature_array_EC_norm.p
+Feature_array_EO_norm.p
+namesec.txt
+nameseo.txt
+Sub_idx_EC
+Sub_idx_EO
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,python
 5.EEGAllChanels/.DS_Store
